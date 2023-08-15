@@ -15,11 +15,13 @@
 
   outputs = { self, crane, nixpkgs, utils }: utils.lib.eachSystem [ "x86_64-darwin" "x86_64-linux" ] (system:
     let
+      pkgs = import nixpkgs { inherit system; };
       craneLib = crane.lib.${system};
 
       common = {
         src = crane.lib.${system}.cleanCargoSource ./.;
         version = "0.1.0";
+        buildInputs = with pkgs; lib.optionals stdenv.isDarwin [ libiconv ];
         doCheck = false;
       };
 
