@@ -1,0 +1,7 @@
+[workspace]
+members = ["crates/foo"]
+
+[workspace.package]
+edition = "2021"
+
+[workspace.dependencies]
