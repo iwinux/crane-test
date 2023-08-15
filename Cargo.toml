@@ -5,3 +5,4 @@ members = ["crates/foo"]
 edition = "2021"
 
 [workspace.dependencies]
+chrono = { version = "=0.4.20", features = ["serde"] }
