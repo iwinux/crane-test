@@ -19,20 +19,19 @@
       craneLib = crane.lib.${system};
 
       common = {
+        pname = "foo";
         src = crane.lib.${system}.cleanCargoSource ./.;
         version = "0.1.0";
         buildInputs = with pkgs; lib.optionals stdenv.isDarwin [ libiconv ];
         doCheck = false;
       };
 
-      deps = craneLib.buildDepsOnly common // {
-        pname = "foo-deps";
-      };
+      deps = craneLib.buildDepsOnly (common // {
+      });
     in
     {
-      packages.default = craneLib.buildPackage common // {
-        pname = "foo";
+      packages.default = craneLib.buildPackage (common // {
         cargoArtifacts = deps;
-      };
+      });
     });
 }
